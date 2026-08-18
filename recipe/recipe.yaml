@@ -25,7 +25,8 @@ requirements:
     - ${{ stdlib("c") }}
     - ${{ compiler('cxx') }}
     - cmake
-    - pkg-config
+    - if:  not win
+      then: pkg-config
     - protobuf-c
     - swig <4.5
     - zlib
