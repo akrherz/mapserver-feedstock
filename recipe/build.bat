@@ -53,7 +53,7 @@ cmake -G "Ninja" %CMAKE_ARGS%                        ^
     -DWITH_V8=0                                      ^
     -DWITH_XMLMAPFILE=0                              ^
     -DWITH_ZLIB=1                                    ^
-    -DWITH_PCRE2=ON                                  ^
+    -DWITH_PCRE2=OFF                                 ^
     %SRC_DIR%
 if errorlevel 1 exit /b 1
 
