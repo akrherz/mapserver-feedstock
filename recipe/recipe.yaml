@@ -1,62 +1,62 @@
-# NB: Lowercase!
-{% set name = "mapserver" %}
-{% set version = "8.6.4" %}
+schema_version: 1
+
+context:
+  name: mapserver
+  version: "8.6.4"
 
 package:
-  name: {{ name }}
-  version: {{ version }}
+  name: ${{ name }}
+  version: ${{ version }}
 
 source:
-  url: https://download.osgeo.org/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://download.osgeo.org/${{ name }}/${{ name }}-${{ version }}.tar.gz
   sha256: 85c51b4d03e0cc8e98073d22ca4cae2259a83c78d6625aa0f060d83f7b5b8055
 
 build:
-  number: 1
-  run_exports:
-    # Presently libmapserver.so.2 is linked to libmapserver.so.x.y.z
-    - {{ pin_subpackage(name, max_pin='x.x.x') }}
+  number: 3
 
 requirements:
   build:
-    - python                                 # [build_platform != target_platform]
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - swig
-    - {{ compiler('c') }}
-    - {{ stdlib("c") }}
-    - {{ compiler('cxx') }}
+    - if: build_platform != target_platform
+      then:
+        - python
+        - cross-python_${{ target_platform }}
+    - ${{ compiler('c') }}
+    - ${{ stdlib("c") }}
+    - ${{ compiler('cxx') }}
     - cmake
-    - make  # [unix]
-    - ninja  # [win]
-    - pkg-config  # [not win]
-    - protobuf-c
-
+    - if: unix
+      then: make
+    - if: win
+      then: ninja
   host:
     - python
     - pip
     - cairo
+    - fcgi2
     - fribidi
     - freetype
     - geos
     - giflib
     - harfbuzz
-    - libjpeg-turbo
     - libcurl
     - libgdal-core
     - libiconv
+    - libjpeg-turbo
     - libpng
     - libpq
     - libxml2-devel
     - mysql-devel
     - pixman
+    - pkg-config
     - postgresql
     - proj
-    - setuptools
-    - swig
-    - zlib
     - protobuf-c
-    - fcgi2
-    - unixodbc  # [not win]
-
+    - setuptools
+    - swig <4.5
+    - if: not win
+      then: unixodbc
+    - zlib
   run:
     - python
     - cairo
@@ -77,28 +77,33 @@ requirements:
     - zlib
     - protobuf-c
     - fcgi2
+  run_exports:
+    - ${{ pin_subpackage(name, upper_bound='x.x.x') }}
 
-test:
-  imports:
-    - mapscript  # [ not osx ]
-  commands:
-    - mapserv -v
+tests:
+  - python:
+      imports:
+        - if:  not osx
+          then: mapscript
+      pip_check: false
+  - script:
+      - mapserv -v
 
 about:
-  home: https://mapserver.org/
   license: MIT
-  license_family: MIT
   license_file: LICENSE.txt
   summary: Platform for publishing spatial data and interative mapping.
   description: |
     MapServer is an Open Source platform for publishing spatial data and
     interactive mapping applications to the web. MapServer is not a
     full-featured GIS system, nor does it aspire to be
-  doc_url: https://mapserver.org/documentation.html
-  dev_url: https://github.com/MapServer/MapServer
+  homepage: https://mapserver.org/
+  repository: https://github.com/MapServer/MapServer
+  documentation: https://mapserver.org/documentation.html
 
 extra:
   recipe-maintainers:
     - akrherz
     - hobu
     - msmitherdc
+
