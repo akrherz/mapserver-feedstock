@@ -27,6 +27,8 @@ requirements:
     - cmake
     - pkg-config
     - protobuf-c
+    - swig <4.5
+    - zlib
     - if: unix
       then: make
     - if: win
