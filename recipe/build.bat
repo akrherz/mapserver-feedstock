@@ -13,7 +13,6 @@ echo "cd %cd%"
 REM -DCMAKE_CXX_FLAGS="/w4004"
 
 cmake -G "Ninja" %CMAKE_ARGS%                        ^
-    -DCMAKE_INSTALL_PREFIX:PATH=%PREFIX%             ^
     -DCMAKE_BUILD_TYPE=Release                       ^
     -DBUILD_SHARED_LIBS=ON                           ^
     -DBUILD_DYNAMIC=ON                               ^
