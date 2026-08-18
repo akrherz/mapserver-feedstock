@@ -26,6 +26,7 @@ requirements:
     - ${{ compiler('cxx') }}
     - cmake
     - pkg-config
+    - protobuf-c
     - if: unix
       then: make
     - if: win
