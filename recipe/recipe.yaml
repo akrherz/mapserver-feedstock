@@ -38,7 +38,8 @@ requirements:
     - python
     - pip
     - cairo
-    - fcgi2
+    - if: not win
+      then: fcgi2
     - fribidi
     - freetype
     - geos
