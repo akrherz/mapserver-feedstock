@@ -12,8 +12,23 @@ echo "cd %cd%"
 
 REM -DCMAKE_CXX_FLAGS="/w4004"
 
+echo ================= ENV =================
+echo PREFIX=%PREFIX%
+echo BUILD_PREFIX=%BUILD_PREFIX%
+echo LIBRARY_PREFIX=%LIBRARY_PREFIX%
+echo LIBRARY_LIB=%LIBRARY_LIB%
+echo LIBRARY_INC=%LIBRARY_INC%
+echo CMAKE_ARGS=%CMAKE_ARGS%
+echo CMAKE_PREFIX_PATH=%CMAKE_PREFIX_PATH%
+echo PKG_CONFIG_PATH=%PKG_CONFIG_PATH%
+echo PATH=%PATH%
+echo ========================================
+
+dir "%LIBRARY_LIB%"
+dir "%LIBRARY_LIB%\pkgconfig"
+dir "%LIBRARY_PREFIX%\bin"
+
 cmake -G "Ninja" %CMAKE_ARGS%                        ^
-    -DCMAKE_PREFIX_PATH="%LIBRARY_PREFIX%"           ^
     -DCMAKE_BUILD_TYPE=Release                       ^
     -DBUILD_SHARED_LIBS=ON                           ^
     -DBUILD_DYNAMIC=ON                               ^
