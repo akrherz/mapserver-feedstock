@@ -57,12 +57,9 @@ requirements:
     - pkg-config
     - postgresql
     - proj
-    - protobuf-c
     - setuptools
-    - swig <4.5
     - if: not win
       then: unixodbc
-    - zlib
   run:
     - python
     - cairo
@@ -80,7 +77,6 @@ requirements:
     - mysql-libs
     - pixman
     - proj
-    - zlib
     - protobuf-c
     - fcgi2
   run_exports:

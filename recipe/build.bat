@@ -12,22 +12,6 @@ echo "cd %cd%"
 
 REM -DCMAKE_CXX_FLAGS="/w4004"
 
-echo ================= ENV =================
-echo PREFIX=%PREFIX%
-echo BUILD_PREFIX=%BUILD_PREFIX%
-echo LIBRARY_PREFIX=%LIBRARY_PREFIX%
-echo LIBRARY_LIB=%LIBRARY_LIB%
-echo LIBRARY_INC=%LIBRARY_INC%
-echo CMAKE_ARGS=%CMAKE_ARGS%
-echo CMAKE_PREFIX_PATH=%CMAKE_PREFIX_PATH%
-echo PKG_CONFIG_PATH=%PKG_CONFIG_PATH%
-echo PATH=%PATH%
-echo ========================================
-
-dir "%LIBRARY_LIB%"
-dir "%LIBRARY_LIB%\pkgconfig"
-dir "%LIBRARY_PREFIX%\bin"
-
 cmake -G "Ninja" %CMAKE_ARGS%                        ^
     -DCMAKE_BUILD_TYPE=Release                       ^
     -DBUILD_SHARED_LIBS=ON                           ^
@@ -80,7 +64,7 @@ cmake --install . --verbose --config Release
 if errorlevel 1 exit /b 1
 
 REM manually install mapserver.dll because MapServer's install is broken right now
-copy mapserver.dll %PREFIX%\bin
+copy mapserver.dll %LIBRARY_BIN%
 
 cd src\mapscript\python
-%PYTHON% -m pip install .
+%PYTHON% -m pip install . -vv --no-deps
