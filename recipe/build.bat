@@ -23,7 +23,7 @@ cmake -G "Ninja" %CMAKE_ARGS%                        ^
     -DWITH_CSHARP=0                                  ^
     -DWITH_CURL=1                                    ^
     -DWITH_EXEMPI=0                                  ^
-    -DWITH_FCGI=0                                    ^
+    -DWITH_FCGI=1                                    ^
     -DWITH_FREETYPE=1                                ^
     -DWITH_FRIBIDI=1                                 ^
     -DWITH_GDAL=1                                    ^
