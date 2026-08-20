@@ -25,15 +25,11 @@ requirements:
     - ${{ stdlib("c") }}
     - ${{ compiler('cxx') }}
     - cmake
-    - if:  not win
-      then: pkg-config
-    - protobuf-c
-    - swig <4.5
-    - zlib
     - if: unix
-      then: make
-    - if: win
-      then: ninja
+      then:
+        - make
+        - pkg-config
+      else: ninja
   host:
     - python
     - pip
@@ -53,32 +49,22 @@ requirements:
     - libpq
     - libxml2-devel
     - mysql-devel
+    - openssl
+    - pcre2
     - pixman
     - pkg-config
     - postgresql
     - proj
+    - protobuf-c
     - setuptools
+    - swig <4.5
     - if: not win
       then: unixodbc
+    - zlib
+    - zstd
   run:
     - python
-    - cairo
-    - fribidi
-    - freetype
-    - geos
-    - giflib
-    - harfbuzz
-    - libjpeg-turbo
-    - libcurl
-    - libgdal-core
-    - libiconv
-    - libpng
-    - libxml2-devel
-    - mysql-libs
-    - pixman
-    - proj
     - protobuf-c
-    - fcgi2
   run_exports:
     - ${{ pin_subpackage(name, upper_bound='x.x.x') }}
 
