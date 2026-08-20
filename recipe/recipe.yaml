@@ -32,6 +32,8 @@ requirements:
       else: ninja
     # Unknown why, but necessary in build deps
     - protobuf-c
+    # appease osx arm64
+    - swig <4.5
   host:
     - python
     - pip
