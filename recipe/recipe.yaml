@@ -30,6 +30,8 @@ requirements:
         - make
         - pkg-config
       else: ninja
+    # Unknown why, but necessary in build deps
+    - protobuf-c
   host:
     - python
     - pip
