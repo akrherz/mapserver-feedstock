@@ -1,0 +1,102 @@
+schema_version: 1
+
+context:
+  name: mapserver
+  version: "8.6.4"
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://download.osgeo.org/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: 85c51b4d03e0cc8e98073d22ca4cae2259a83c78d6625aa0f060d83f7b5b8055
+
+build:
+  number: 3
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then:
+        - python
+        - cross-python_${{ target_platform }}
+    - ${{ compiler('c') }}
+    - ${{ stdlib("c") }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - if: unix
+      then:
+        - make
+        - pkg-config
+      else: ninja
+    # Unknown why, but necessary in build deps
+    - protobuf-c
+    # appease osx arm64
+    - swig <4.5
+  host:
+    - python
+    - pip
+    - cairo
+    - if: not win
+      then: fcgi2
+    - fribidi
+    - freetype
+    - geos
+    - giflib
+    - harfbuzz
+    - libcurl
+    - libgdal-core
+    - libiconv
+    - libjpeg-turbo
+    - libpng
+    - libpq
+    - libxml2-devel
+    - mysql-devel
+    - openssl
+    - pcre2
+    - pixman
+    - pkg-config
+    - postgresql
+    - proj
+    - protobuf-c
+    - setuptools
+    - swig <4.5
+    - if: not win
+      then: unixodbc
+    - zlib
+    - zstd
+  run:
+    - python
+    - protobuf-c
+    - if: not win
+      then: fcgi2
+  run_exports:
+    - ${{ pin_subpackage(name, upper_bound='x.x.x') }}
+
+tests:
+  - python:
+      imports:
+        - if:  not osx
+          then: mapscript
+      pip_check: false
+  - script:
+      - mapserv -v
+
+about:
+  license: MIT
+  license_file: LICENSE.txt
+  summary: Platform for publishing spatial data and interative mapping.
+  description: |
+    MapServer is an Open Source platform for publishing spatial data and
+    interactive mapping applications to the web. MapServer is not a
+    full-featured GIS system, nor does it aspire to be
+  homepage: https://mapserver.org/
+  repository: https://github.com/MapServer/MapServer
+  documentation: https://mapserver.org/documentation.html
+
+extra:
+  recipe-maintainers:
+    - akrherz
+    - hobu
+    - msmitherdc
