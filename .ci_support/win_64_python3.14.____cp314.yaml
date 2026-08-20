@@ -15,7 +15,7 @@ freetype:
 geos:
 - 3.14.1
 giflib:
-- '5.2'
+- '6'
 libcurl:
 - '8'
 libgdal_core:
@@ -32,6 +32,10 @@ libxml2_devel:
 - '2.14'
 mysql_devel:
 - '9.7'
+openssl:
+- '3.5'
+pcre2:
+- '10.47'
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -48,3 +52,5 @@ target_platform:
 - win-64
 zlib:
 - '1'
+zstd:
+- '1.5'
