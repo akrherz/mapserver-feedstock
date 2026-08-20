@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: mapserver
-  version: "8.6.4"
+  version: "8.6.5"
 
 package:
   name: ${{ name }}
@@ -10,10 +10,10 @@ package:
 
 source:
   url: https://download.osgeo.org/${{ name }}/${{ name }}-${{ version }}.tar.gz
-  sha256: 85c51b4d03e0cc8e98073d22ca4cae2259a83c78d6625aa0f060d83f7b5b8055
+  sha256: 2ecc96ff8e87346f0ed63751675b899806910e5feafeb16066362ad0cd661760
 
 build:
-  number: 4
+  number: 0
 
 requirements:
   build:
