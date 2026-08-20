@@ -13,7 +13,7 @@ source:
   sha256: 2ecc96ff8e87346f0ed63751675b899806910e5feafeb16066362ad0cd661760
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -38,8 +38,7 @@ requirements:
     - python
     - pip
     - cairo
-    - if: not win
-      then: fcgi2
+    - fcgi2
     - fribidi
     - freetype
     - geos
@@ -69,8 +68,7 @@ requirements:
   run:
     - python
     - protobuf-c
-    - if: not win
-      then: fcgi2
+    - fcgi2
   run_exports:
     - ${{ pin_subpackage(name, upper_bound='x.x.x') }}
 
