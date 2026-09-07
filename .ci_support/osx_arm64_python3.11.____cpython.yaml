@@ -39,7 +39,7 @@ libpng:
 libpq:
 - '18'
 libxml2_devel:
-- '2.14'
+- '2.15'
 macos_machine:
 - arm64-apple-darwin20.0.0
 mysql_devel:

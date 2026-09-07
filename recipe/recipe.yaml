@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: mapserver
-  version: "8.6.5"
+  version: "8.6.6"
 
 package:
   name: ${{ name }}
@@ -10,10 +10,10 @@ package:
 
 source:
   url: https://download.osgeo.org/${{ name }}/${{ name }}-${{ version }}.tar.gz
-  sha256: 2ecc96ff8e87346f0ed63751675b899806910e5feafeb16066362ad0cd661760
+  sha256: e908e76b65541042042e9c5e4ae16a131f064cf6d3c76e9542c89b25158968c9
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
@@ -75,7 +75,7 @@ requirements:
 tests:
   - python:
       imports:
-        - if:  not osx
+        - if: not osx
           then: mapscript
       pip_check: false
   - script:
